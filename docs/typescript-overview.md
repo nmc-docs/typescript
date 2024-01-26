@@ -20,17 +20,24 @@ slug: /
 npm init -y
 ```
 
+- Cài các dependencies cần thiết:
+
+```
+npm install @types/node tslib
+```
+
 - Cài các devDependencies cần thiết:
 
 ```bash
-npm install -D typescript nodemon esno tsc-alias
+npm install -D typescript ts-node nodemon tsconfig-paths tsc-alias
 ```
 
 :::info
 
 - **typescript** : thư viện ngôn ngữ TypeScript
 - **nodemon** : tự động restart lại code khi có sự thay đổi
-- **esno** : dùng để chạy TypeScript trực tiếp mà không cần phải biên dịch sang JavaScript
+- **ts-node**: dùng để chạy TypeScript trực tiếp
+- **tsconfig-paths**: giúp TypeScript hiểu các alias import khi chạy ở môi trường dev
 - **tsc-alias** : giúp TypeScript có thể hiểu được alias import (absolute path) khi biên dịch sang JavaScript
 
 :::
@@ -59,10 +66,14 @@ npx tsc --init
     "esModuleInterop": true,
     "noUncheckedIndexedAccess": true,
     "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
       "src/*": ["./src/*"]
     }
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
   },
   "include": ["src"],
   "exclude": ["node_modules"]
@@ -91,17 +102,29 @@ npx tsc --init
 console.log("Hello TypeScript");
 ```
 
+- Tạo file `nodemon.json` ở ngoài cùng thư mục dự án để cấu hình nodemon chạy dự án ở môi trường dev:
+
+```json title="nodemon.json"
+{
+  "events": {
+    "start": "clear"
+  },
+  "watch": ["src"],
+  "ext": "ts",
+  "exec": "node -r ts-node/register --env-file=.env src/main.ts"
+}
+```
+
 - Vào file `package.json` tạo script để chạy TypeScript:
 
 ```json title="package.json"
 {
-  "name": "test-typescript",
+  "name": "typescript-project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec esno src/main.ts",
+    "dev": "nodemon src/main.ts",
     "build": "tsc && tsc-alias",
     "start": "node build/main.js"
   },
@@ -109,10 +132,15 @@ console.log("Hello TypeScript");
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "esno": "^0.17.0",
-    "nodemon": "^3.0.1",
-    "tsc-alias": "^1.8.7",
-    "typescript": "^5.1.6"
+    "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2",
+    "tsc-alias": "^1.8.8",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@types/node": "^20.11.7",
+    "tslib": "^2.6.2"
   }
 }
 ```
@@ -121,7 +149,7 @@ console.log("Hello TypeScript");
 
 :::info
 
-- **npm run dev** : Sử dụng lệnh này để thực thi trực tiếp các file TypeScript mà không cần biên dịch sang JavaScript
+- **npm run dev** : Sử dụng lệnh này để chạy file TypeScript
 - **npm run build** : Biên dịch tất cả các file sang JavaScript
 - **npm start** : thực hiện chạy file chính sau khi đã biên dịch sang JavaScript
 
