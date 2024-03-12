@@ -29,9 +29,9 @@ class Person {
   }
 
   //Khai báo các phương thức của class, truy cập thuộc tính của class bằng từ khóa this
-  greet(): void {
+  greet = (): void => {
     console.log(`Hello, my name is ${this.name} and I work at ${this.company}`);
-  }
+  };
 }
 
 const person = new Person("John", 30, "USA", "Google");
@@ -59,9 +59,9 @@ class Person {
     this.company = company;
   }
 
-  greet(): void {
+  greet = (): void => {
     console.log(`Hello, my name is ${this.name} and I work at ${this.company}`);
-  }
+  };
 }
 
 const person = new Person("John", 30, "USA");
@@ -84,9 +84,9 @@ class Person {
     this.company = company;
   }
 
-  greet(): void {
+  greet = (): void => {
     console.log(`Hello, my name is ${this.name} and I live in ${this.address}`);
-  }
+  };
 }
 
 const person = new Person("John", 30, "New York");
@@ -102,23 +102,33 @@ class Person {
     this.name = name;
   }
 
-  setNewName(newName: string): void {
+  setNewName = (newName: string): void => {
     this.name = newName; // Error: Cannot assign to 'name' because it is a read-only property.
-  }
+  };
 }
 ```
 
-- Khi tạo một class và khai báo các thuộc tính bên trong class đó thì sẽ luôn phải kèm theo hàm khởi tạo `constructor()`, nếu không sẽ báo lỗi. Nếu ta không muốn dùng hàm khởi tạo, ta có thể thêm từ khóa `declare` ở trước tên thuộc tính. Khi ta sử dụng từ khóa `declare` để khai báo một thuộc tính, TypeScript sẽ giả định rằng thuộc tính đó đã được khai báo trong một module khác, và không cần khởi tạo bằng constructor trong class hiện tại.
-
-```ts
-class Person {
-  //Khai báo các thuộc tính của class
-  declare name: string;
-  declare age: number;
-  declare address: string;
-  declare company: string;
-}
-```
+- Khi tạo một class và khai báo các thuộc tính bên trong class đó thì sẽ luôn phải kèm theo hàm khởi tạo `constructor()`, nếu không sẽ báo lỗi. Nếu ta không muốn dùng hàm khởi tạo, ta có 2 cách:
+  - Thêm từ khóa `declare` ở trước tên thuộc tính. Khi ta sử dụng từ khóa `declare` để khai báo một thuộc tính, TypeScript sẽ giả định rằng thuộc tính đó đã được khai báo trong một module khác, và không cần khởi tạo bằng constructor trong class hiện tại.
+    ```ts
+    class Person {
+      //Khai báo các thuộc tính của class
+      declare name: string;
+      declare age: number;
+      declare address: string;
+      declare company: string;
+    }
+    ```
+  - Sử dụng toán tử "!" (non-null assertion operator). Điều này đang báo cho TypeScript biết rằng mỗi thuộc tính đó sẽ luôn được khởi tạo và không bao giờ có thể là null hoặc undefined. Điều này thường được sử dụng khi bạn biết rằng các thuộc tính sẽ được khởi tạo ngay sau khi đối tượng được tạo, hoặc khi bạn chắc chắn rằng các giá trị đó sẽ không bao giờ là null trong quá trình chạy của chương trình.
+    ```ts
+    class Person {
+      //Khai báo các thuộc tính của class
+      name!: string;
+      age!: number;
+      address!: string;
+      company!: string;
+    }
+    ```
 
 ## Class constructor shorthand
 
@@ -133,11 +143,17 @@ class Person {
     public company: string = "Google"
   ) {}
 
-  greet(): void {
+  greet = (): void => {
     console.log(`Hello, my name is ${this.name} and I work at ${this.company}`);
-  }
+  };
 }
 
 const person = new Person("John", 30);
 person.greet(); // Hello, my name is John and I work at Google
 ```
+
+:::note
+
+- Khi khai báo một phương thức cho một class, nên viết nó dưới dạng arrow function
+
+:::
