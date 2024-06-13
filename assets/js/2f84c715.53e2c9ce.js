@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunktypescript=self.webpackChunktypescript||[]).push([[1578],{4699:e=>{e.exports=JSON.parse('{"title":"Class","slug":"/category/class","permalink":"/typescript/category/class","navigation":{"previous":{"title":"Generics","permalink":"/typescript/generics"},"next":{"title":"Gi\u1edbi thi\u1ec7u","permalink":"/typescript/class/introduce"}}}')}}]);
