@@ -2,7 +2,7 @@
 sidebar_position: 7
 ---
 
-# Omit<Type, Keys>
+# Omit\<Type, Keys\>
 
 - `Omit<Type, Keys>` trả về một **object type** dựa trên `Type` và loại bỏ đi các thuộc tính từ `Keys` (thường là [literal types](../types/literal-types))
 

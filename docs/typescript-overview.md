@@ -50,7 +50,7 @@ npx tsc --init
 
 - Trong file `tsconfig.json`, ta sẽ thực hiện một số cấu hình cho Typescript:
 
-```json title="tsconfig.json"
+```json
 {
   "compilerOptions": {
     "strict": true,
@@ -85,7 +85,7 @@ npx tsc --init
 | "target": "ESNext"                                                | Chọn phiên bản JavaScript ES mới nhất để biên dịch                                                                                                                                                                                     |
 | "module": "CommonJS"                                              | Chỉ định module system cho chương trình                                                                                                                                                                                                |
 | "outDir": "build"                                                 | Chỉ định thư mục sẽ chứa tất cả các file được biên dịch sang js                                                                                                                                                                        |
-| "baseUrl": ".",<br />"paths": { "src/_": ["./src/_ "] }           | Thiết lập**absolute import** (loại bỏ `../`, `./` khi ta import).                                                                                                                                                                      |
+| "baseUrl": ".",<br />"paths": \{ "src/_": ["./src/_ "] \}         | Thiết lập**absolute import** (loại bỏ `../`, `./` khi ta import).                                                                                                                                                                      |
 | "moduleResolution": "Node"                                        | Thiết lập cách để TypeScript tìm kiếm các module được import trong dự án của bạn.                                                                                                                                                      |
 | "resolveJsonModule": true                                         | Cho phép import file**json**                                                                                                                                                                                                           |
 | "importHelpers": true                                             | Cải thiện khả năng tương thích của TypeScript với ECMAScript 5 và các phiên bản trước của công cụ JavaScript vốn không hỗ trợ một số tính năng ngôn ngữ nhất định. Ngoài ra nó có thể giúp giảm kích thước tệp JavaScript đã biên dịch |
@@ -98,13 +98,13 @@ npx tsc --init
 
 - Tạo một thư mục **src** và một file **main.ts** bên trong thư mục đó:
 
-```ts title="src/main.ts"
+```ts
 console.log("Hello TypeScript");
 ```
 
 - Tạo file `nodemon.json` ở ngoài cùng thư mục dự án để cấu hình nodemon chạy dự án ở môi trường dev:
 
-```json title="nodemon.json"
+```json
 {
   "events": {
     "start": "clear"
@@ -117,7 +117,7 @@ console.log("Hello TypeScript");
 
 - Vào file `package.json` tạo script để chạy TypeScript:
 
-```json title="package.json"
+```json
 {
   "name": "typescript-project",
   "version": "1.0.0",

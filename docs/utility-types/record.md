@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Record<Keys, Type>
+# Record\<Keys, Type\>
 
 - `Record<Keys, Type>` trả về một **object type** với tất cả các `properties` từ `Keys` (thường là [literal types](../types/literal-types)) và kiểu của `value` là `Type`
 
