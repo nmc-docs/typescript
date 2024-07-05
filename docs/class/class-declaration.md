@@ -4,6 +4,8 @@ sidebar_position: 2
 
 # Khai báo một class
 
+## Thành phần của một class
+
 - Một **Class** gồm có 3 thành phần chính:
 
   - Thuộc tính (property)
@@ -108,8 +110,16 @@ class Person {
 }
 ```
 
-- Khi tạo một class và khai báo các thuộc tính bên trong class đó thì sẽ luôn phải kèm theo hàm khởi tạo `constructor()`, nếu không sẽ báo lỗi. Nếu ta không muốn dùng hàm khởi tạo, ta có 2 cách:
+- Khi tạo một class và khai báo các thuộc tính bên trong class đó thì sẽ luôn phải kèm theo hàm khởi tạo `constructor()`, nếu không sẽ báo lỗi. Nếu ta không muốn dùng hàm khởi tạo, ta có 3 cách:
+
+  - Thêm cấu hình sau vào file **tsconfig.json**:
+
+    ```json
+    "strictPropertyInitialization": false,
+    ```
+
   - Thêm từ khóa `declare` ở trước tên thuộc tính. Khi ta sử dụng từ khóa `declare` để khai báo một thuộc tính, TypeScript sẽ giả định rằng thuộc tính đó đã được khai báo trong một module khác, và không cần khởi tạo bằng constructor trong class hiện tại.
+
     ```ts
     class Person {
       //Khai báo các thuộc tính của class
@@ -119,7 +129,9 @@ class Person {
       declare company: string;
     }
     ```
+
   - Sử dụng toán tử "!" (non-null assertion operator). Điều này đang báo cho TypeScript biết rằng mỗi thuộc tính đó sẽ luôn được khởi tạo và không bao giờ có thể là null hoặc undefined. Điều này thường được sử dụng khi bạn biết rằng các thuộc tính sẽ được khởi tạo ngay sau khi đối tượng được tạo, hoặc khi bạn chắc chắn rằng các giá trị đó sẽ không bao giờ là null trong quá trình chạy của chương trình.
+
     ```ts
     class Person {
       //Khai báo các thuộc tính của class
@@ -132,7 +144,7 @@ class Person {
 
 ## Class constructor shorthand
 
-- Ta có thể gộp việc khai báo thuộc tính và hàm khởi tạo của class bằng cách thêm [Access Modifiers](./access-modifiers) trước tên của parameter:
+- Ta có thể gộp việc khai báo thuộc tính và hàm khởi tạo của class bằng cách thêm [Access Modifiers](./access-modifiers) trước tên của parameter trong `constructor()`:
 
 ```ts
 class Person {
@@ -152,8 +164,52 @@ const person = new Person("John", 30);
 person.greet(); // Hello, my name is John and I work at Google
 ```
 
-:::note
+```ts
+class Person {
+  public fullName: string;
 
-- Khi khai báo một phương thức cho một class, nên viết nó dưới dạng arrow function
+  constructor(
+    public firstName: string,
+    public lastName: string,
+    public age: number,
+    public email: string,
+    public address: string
+  ) {
+    this.fullName = `${firstName} ${lastName}`;
+  }
+}
 
-:::
+const p = new Person("Nguyen", "Chi", 20, "minhchico@gmail.com", "QuangNinh");
+
+console.log(p.fullName); // "Nguyen Chi"
+```
+
+## Thuộc tính là hằng số
+
+- Ví dụ dưới đây mô tả việc sử dụng 1 thuộc tính là hằng số trong class:
+
+```ts
+class Person {
+  private readonly country: string = "Vietnam"; // This is a constant property
+  private fullName: string;
+
+  constructor(
+    private firstName: string,
+    private lastName: string,
+    private age: number,
+    private email: string,
+    private address: string
+  ) {
+    this.fullName = `${firstName} ${lastName}`;
+  }
+
+  greeting = () => {
+    console.log(
+      `Hello, I am ${this.fullName} and I am from ${this.address}, ${this.country}`
+    );
+  };
+}
+
+const p = new Person("Nguyen", "Chi", 20, "minhchico@gmail.com", "Quang Ninh");
+p.greeting(); // "Hello, I am Nguyen Chi and I am from Quang Ninh, Vietnam"
+```
