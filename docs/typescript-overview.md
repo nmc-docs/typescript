@@ -53,7 +53,7 @@ npx tsc --init
 
 - Trong file `tsconfig.json`, ta sẽ thực hiện một số cấu hình cho Typescript:
 
-```json
+```json title="tsconfig.json"
 {
   "compilerOptions": {
     "strict": true,
@@ -121,13 +121,13 @@ npx tsc --init
 
 - Tạo một thư mục **src** và một file **main.ts** bên trong thư mục đó:
 
-```ts
+```ts title="src/main.ts"
 console.log("Hello TypeScript");
 ```
 
 - Vào file `package.json` tạo script để chạy TypeScript:
 
-```json
+```json title="package.json"
 {
   "name": "typescript-learning",
   "version": "1.0.0",
