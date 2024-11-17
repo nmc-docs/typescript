@@ -57,15 +57,16 @@ npx tsc --init
 {
   "compilerOptions": {
     "strict": true,
-    "module": "commonjs",
+    "module": "CommonJS",
     "moduleResolution": "Node",
+    "outDir": "./dist",
     "declaration": true,
+    "declarationDir": "./dist/declaration",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowJs": true,
     "target": "ES2021",
     "sourceMap": true,
-    "outDir": "./dist",
     "incremental": true,
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
@@ -92,6 +93,7 @@ npx tsc --init
 | `module: "commonjs"`                     | Chỉ định hệ thống module được sử dụng. Ở đây,`commonjs` là hệ thống module tiêu chuẩn của Node.js.                                                                                                                                                                |
 | `moduleResolution: "Node"`               | Chỉ định cách trình biên dịch tìm kiếm các tệp module. Với giá trị `"Node"`, TypeScript sẽ sử dụng cơ chế tìm kiếm module giống như Node.js (tìm kiếm qua các thư mục `node_modules` và các đường dẫn liên quan).                                                 |
 | `declaration: true`                      | Tạo các tệp `.d.ts` để xuất ra các khai báo kiểu TypeScript cho mã của bạn, hữu ích khi người khác sử dụng mã của bạn như là một thư viện.                                                                                                                        |
+| `declarationDir`                         | Chỉ định đường dẫn đến thư mục mà các file **.d.ts** khi biên dịch sang Javascript sẽ ở đó. Chỉ hoạt động khi `declaration: true`                                                                                                                                 |
 | `emitDecoratorMetadata: true`            | Cho phép TypeScript phát ra metadata cho các decorators (thường sử dụng trong các framework như Angular hay NestJS).                                                                                                                                              |
 | `experimentalDecorators: true`           | Cho phép sử dụng decorators, một tính năng chưa được chính thức chuẩn hóa trong JavaScript nhưng có trong TypeScript.                                                                                                                                             |
 | `target: "ES2021"`                       | Chỉ định phiên bản ECMAScript mà mã TypeScript sẽ được biên dịch xuống. Ở đây, mã sẽ biên dịch xuống phiên bản ES2021 (tương đương ECMAScript 12).                                                                                                                |
